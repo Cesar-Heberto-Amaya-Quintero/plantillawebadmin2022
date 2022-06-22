@@ -7,6 +7,8 @@ composer install
 #Restablecer el .env (mac y linux)
 #En windows quizas sea copy o xcopy
 cp .env.example .env
+#Hacer el symlink para el almacenamiento
+php artisan storage:link
 #Restuarar la BD desde el manejador de BD
 #Corremos el server de prueba
 php artisan serve
