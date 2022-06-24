@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\UsuariosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,20 @@ Route::delete('/clientes/{id}',
     ->name('clientes.destroy');
 
 
+//USUARIOS
+
+Route::get('/usuarios',
+    [UsuariosController::class, 'index'])
+    ->name('usuarios.index');
+
+Route::get('/usuarios/create',
+    [UsuariosController::class, 'create'])
+    ->name('usuarios.create');
+
+Route::post('/usuarios',
+    [UsuariosController::class, 'store'])
+    ->name('usuarios.store');
+
+Route::get('/usuarios/{id}/edit',
+    [UsuariosController::class, 'edit'])
+    ->name('usuarios.edit');

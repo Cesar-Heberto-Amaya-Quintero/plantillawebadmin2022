@@ -52,6 +52,12 @@ class ClientesController extends Controller
         $nuevoCliente->telefono = $request->input('telefono');
         $nuevoCliente->correo = $request->input('correo');
 
+        //Si tiene un archivo llamado foto hacemos la rutina de guardado
+        if($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('public/clientes');
+            $nuevoCliente->foto = $request->file('foto')->hashName();
+        }
+
         if ($nuevoCliente->save())
         {
             return redirect()->route('clientes.index')->with('exito',"Se ha guardado el cliente $nuevoCliente->nombre");
@@ -75,6 +81,12 @@ class ClientesController extends Controller
             $cliente->nombre = $request->input('nombre');
             $cliente->telefono = $request->input('telefono');
             $cliente->correo = $request->input('correo');
+            // $cliente->password = bcrypt($request->input('password'));
+
+            if($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('public/clientes');
+                $cliente->foto = $request->file('foto')->hashName();
+            }
 
             if ($cliente->save())
             {

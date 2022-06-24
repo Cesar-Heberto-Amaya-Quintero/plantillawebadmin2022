@@ -89,7 +89,23 @@
                                 
                             </div>
 
-                            <div class="form-group mb-2" >
+                            @if ($cliente->foto)
+
+                                {{-- <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                    <img src="{{"/storage/clientes/$cliente->foto"}}" alt="image">    
+                                </div> --}}
+                                <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+                                    <a href="{{"/storage/clientes/$cliente->foto"}}" target="_blank">
+                                        <div class="symbol-label" style="background-image:url('{{"/storage/clientes/$cliente->foto"}}')"></div>
+                                    </a>
+                                </div>
+                            @else
+                                <small class="badge badge-secondary">Este cliente aún no tiene foto.</small>
+                            @endif
+
+                            
+
+                            <div class="form-group mb-2 mt-4" >
 
                                 <button class="btn btn-primary" type="submit"> Actualizar</button>
                                 

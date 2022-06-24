@@ -1,6 +1,6 @@
 @extends('layouts.base')
-@section('titulo', 'Clientes')
-@section('modulo', 'Clientes')
+@section('titulo', 'Usuarios')
+@section('modulo', 'Usuarios')
 @section('seccion', 'Lista')
 
 @section('estilos')
@@ -35,12 +35,12 @@
             <!--begin::Header-->
             <div class="card-header align-items-center border-0 mt-4">
                 <h3 class="card-title align-items-start flex-column">
-                    <span class="fw-bolder mb-2 text-dark">Clientes</span>
-                    <span class="text-muted fw-bold fs-7">Mostrando {{ count($clientes)}} clientes</span>
+                    <span class="fw-bolder mb-2 text-dark">Usuarios</span>
+                    <span class="text-muted fw-bold fs-7">Mostrando  usuarios</span>
                 </h3>
                 <div class="card-toolbar">
                     <!--begin::Menu-->
-                    <a href=" {{ route('clientes.create')}}" class="btn btn-primary btn-sm"> Nuevo </a>
+                    <a href=" {{ route('usuarios.create')}}" class="btn btn-primary btn-sm"> Nuevo </a>
                     
                     <!--end::Menu-->
                 </div>
@@ -60,17 +60,17 @@
                     </thead>
 
                     <tbody>
-                    @foreach ($clientes as $cliente)
+                    @foreach ($users as $usuario)
                         <tr>
-                            <td> {{ $cliente->id}}</td> 
-                            <td> {{ $cliente->nombre}}</td> 
-                            <td> {{ $cliente->correo}}</td> 
+                            <td> {{ $usuario->id}}</td> 
+                            <td> {{ $usuario->name}}</td> 
+                            <td> {{ $usuario->email}}</td> 
                             <td> 
-                                <a href= '{{ route('clientes.edit', $cliente->id)}}' class="btn btn-primary btn-sm" > 
+                                <a href= '{{ route('usuarios.edit', $usuario->id)}}' class="btn btn-primary btn-sm" > 
                                     <i class= "fas fa-edit"> </i>
                                 </a>
 
-                                <a href= '#' class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmarEliminar" onclick="ajustarFormularioEliminar('{{$cliente->id}}','{{$cliente->nombre}}', '{{ route('clientes.destroy', $cliente->id)}}')"> 
+                                <a href= '#' class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmarEliminar" onclick=""> 
                                     <i class= "fas fa-times"> </i>
                                 </a>
 
@@ -85,6 +85,8 @@
             </div>
             <!--end: Card Body-->
         </div>
+
+        
     </div>
 </div>
 
