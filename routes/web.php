@@ -73,3 +73,11 @@ Route::post('/usuarios',
 Route::get('/usuarios/{id}/edit',
     [UsuariosController::class, 'edit'])
     ->name('usuarios.edit');
+
+Route::put('/usuarios/{id}',
+    [UsuariosController::class, 'update'])
+    ->name('usuarios.update');
+
+Route::delete('/usuarios/{id}',
+    [UsuariosController::class, 'destroy'])
+    ->name('usuarios.destroy');

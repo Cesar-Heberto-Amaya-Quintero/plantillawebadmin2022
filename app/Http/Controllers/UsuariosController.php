@@ -8,7 +8,8 @@ use App\Models\User;
 class UsuariosController extends Controller
 {
     public function index () {
-        $usuarios = User::all();
+        // $usuarios = User::all();
+        $usuarios = User::where('activo', 1)->orderBy('id', 'DESC')->get();
         $argumentos['users'] = $usuarios;
 
         return view('usuarios.index', $argumentos);
@@ -50,4 +51,44 @@ class UsuariosController extends Controller
         }
         return redirect()->back()->with('error',"No se pudo guardar el nuevo usuario");
     }
+
+    public function update(Request $request, $id) {
+        $usuario = User::find($id);
+        if($usuario) {
+
+            $usuario->name = $request->input('nombre');
+            $usuario->email = $request->input('correo');
+            // $usuario->password = bycript($request->input('contrasena'));
+
+
+            if($request->hasFile('foto')) {
+                $path = $request->file('foto')->store('public/usuarios');
+                $usuario->foto = $request->file('foto')->hashName();
+            }
+
+            if ($usuario->save())
+            {
+                return redirect()->route('usuarios.edit', $usuario->id)->with('exito',"Se ha actualizado el usuario $usuario->id");
+            }
+            return redirect()->back()->with('error',"No se pudo actualizar el usuario");
+        }
+
+        return redirect()->route('usuarios.index')->with('error', "No se encontró usuario $id");
+        
+    }
+
+    public function destroy($id) {
+        $usuario = User::find($id);
+        if($usuario) {
+            $usuario->activo = 0;
+            if($usuario->save()) {
+                //todo salió bien
+                return redirect()->route('usuarios.index')->with('exito', "Se ha eliminado al usuario $id: $usuario->nombre");
+            }
+            //Algo salió mal
+            return redirect()->route('usuarios.index')->with('error', "No se pudo eliminar al usuario $id");
+        }
+        return redirect()->route('usuarios.index')->with('error', "No se encontró usuario $id");
+    }
 }
+

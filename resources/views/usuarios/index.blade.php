@@ -36,7 +36,7 @@
             <div class="card-header align-items-center border-0 mt-4">
                 <h3 class="card-title align-items-start flex-column">
                     <span class="fw-bolder mb-2 text-dark">Usuarios</span>
-                    <span class="text-muted fw-bold fs-7">Mostrando  usuarios</span>
+                    <span class="text-muted fw-bold fs-7">Mostrando {{ count($users)}} usuarios</span>
                 </h3>
                 <div class="card-toolbar">
                     <!--begin::Menu-->
@@ -70,7 +70,7 @@
                                     <i class= "fas fa-edit"> </i>
                                 </a>
 
-                                <a href= '#' class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmarEliminar" onclick=""> 
+                                <a href= '#' class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmarEliminar" onclick="ajustarFormularioEliminar('{{$usuario->id}}', '{{$usuario->name}}', '{{route('usuarios.destroy', $usuario->id)}}')"> 
                                     <i class= "fas fa-times"> </i>
                                 </a>
 
@@ -91,16 +91,16 @@
 </div>
 
 
-<!-- Modal de confirmación para eliminar cliente -->
+<!-- Modal de confirmación para eliminar usuario -->
 <div class="modal fade" id="confirmarEliminar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que deseas eliminar al cliente <span id="lblIdCliente"> </span>: <span id="lblnombreCliente"> </span> </h5>
+        <h5 class="modal-title" id="exampleModalLabel">¿Estás seguro que deseas eliminar al usuario <span id="lblIdUsuario"> </span>: <span id="lblnombreUsuario"> </span> </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Recuerda que si eliminas a este cliente, ya no formará parte del catálogo del cliente.
+        Recuerda que si eliminas a este usuario, ya no formará parte del catálogo de usuarios.
       </div>
       <div class="modal-footer">
       <form id="frmEliminar" action="#" method="POST">
@@ -120,8 +120,8 @@
     <script src="/assets/plugins/custom/datatables/datatables.bundle.js"></script>
     <script>
         function ajustarFormularioEliminar(id, nombre, ruta) {
-            $("#lblIdCliente").text(id);
-            $("#lblnombreCliente").text(nombre);
+            $("#lblIdUsuario").text(id);
+            $("#lblnombreUsuario").text(nombre);
             $("#frmEliminar").attr('action', ruta);
         }
 
